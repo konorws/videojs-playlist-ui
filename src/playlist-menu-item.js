@@ -168,6 +168,22 @@ class PlaylistMenuItem extends Component {
       titleContainerEl.appendChild(descriptionEl);
     }
 
+    if (typeof item.progress !== 'undefined') {
+      const progressWrap = document.createElement('div');
+      progressWrap.className = 'vjs-playlist-progress';
+
+      const progressBar = document.createElement('div');
+      progressBar.className = 'vjs-playlist-progress-bar';
+
+      const p = Number(item.progress) || 0;
+      const clamped = Math.max(0, Math.min(100, p));
+      progressBar.style.width = clamped + '%';
+
+      progressWrap.appendChild(progressBar);
+      li.appendChild(progressWrap);
+      this.progressEl_ = progressBar;
+    }
+
     return li;
   }
 }
